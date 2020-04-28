@@ -56,4 +56,28 @@ public class MoviesRepository {
                     }
                 });
     }
+
+    public void getGenres(final OnGetGenresCallback callback) {
+        api.getGenres(BuildConfig.TMDB_API_KEY, LANGUAGE)
+                .enqueue((new Callback<GenresResponse>() {
+                    @Override
+                    public void onResponse(Call<GenresResponse> call, Response<GenresResponse> response) {
+                        if (response.isSuccessful()) {
+                            GenresResponse genresResponse = response.body();
+                            if(genresResponse != null && genresResponse.getGenres() != null) {
+                                callback.onSuccess(genresResponse.getGenres());
+                            } else {
+                                callback.onError();
+                            }
+                        } else {
+                            callback.onError();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<GenresResponse> call, Throwable t) {
+                        callback.onError();
+                    }
+                }));
+    }
 }

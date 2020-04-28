@@ -27,17 +27,39 @@ public class MainActivity extends AppCompatActivity {
         moviesList = findViewById(R.id.movies_list);
         moviesList.setLayoutManager(new LinearLayoutManager(this));
 
+        getGenresMovies();
+    }
+
+    private void getGenresMovies() {
+        moviesRepository.getGenres(new OnGetGenresCallback() {
+            @Override
+            public void onSuccess(List<Genre> genres) {
+                getMovies(genres);
+            }
+
+            @Override
+            public void onError() {
+                showError();
+            }
+        });
+    }
+
+    private void getMovies(List<Genre> genres) {
         moviesRepository.getMovies(new OnGetMoviesCallback() {
             @Override
             public void onSuccess(List<Movie> movies) {
-                adapter = new MoviesAdapter(movies);
+                adapter = new MoviesAdapter(movies, genres);
                 moviesList.setAdapter(adapter);
             }
 
             @Override
             public void onError() {
-                Toast.makeText(MainActivity.this, "Check Internet connection", Toast.LENGTH_SHORT).show();
+                showError();
             }
         });
+    }
+
+    private void showError() {
+        Toast.makeText(MainActivity.this, "Check Internet connection", Toast.LENGTH_SHORT).show();
     }
 }
