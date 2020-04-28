@@ -1,4 +1,4 @@
-package com.example.tmdb_test_app;
+package com.example.tmdb_test_app.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -6,7 +6,6 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 public class MoviesResponse {
-
     @SerializedName("page")
     @Expose
     private int page;
