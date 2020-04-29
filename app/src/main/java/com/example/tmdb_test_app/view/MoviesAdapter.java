@@ -1,7 +1,6 @@
 package com.example.tmdb_test_app.view;
 
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -18,11 +17,6 @@ import java.util.List;
 public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewHolder> {
     private List<Movie> movies;
     private List<Genre> all_genres;
-
-//    public MoviesAdapter(List<Movie> movies, List<Genre> all_genres) {
-//        this.movies = movies;
-//        this.all_genres = all_genres;
-//    }
 
     @NonNull
     @Override
@@ -59,14 +53,6 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
             super(binding.getRoot());
             this.itemMovieBinding = binding;
         }
-
-//        public void bind(Movie movie) {
-//        }
-
-//        @Override
-//        public void onBindViewHolder(final MovieViewHolder holder, final int position) {
-//
-//        }
     }
 
 }

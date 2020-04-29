@@ -20,7 +20,6 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
     private final String TAG = getClass().getSimpleName();
 
-//    ItemMovieBinding binding;
     private MovieListViewModel model;
     private MoviesAdapter moviesAdapter;
 
@@ -41,9 +40,6 @@ public class MainActivity extends AppCompatActivity {
         Log.e(TAG, "Inside onCreate");
 
         getAllMovies();
-//        model.getMovies().observe(this, movies -> {
-//            // Update UI
-//        });
     }
 
     private void getAllMovies() {

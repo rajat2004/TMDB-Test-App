@@ -34,15 +34,12 @@ public class MovieRepository {
 
     private final String TAG = getClass().getSimpleName();
 
-//    public static TMDBService create() {
     private MovieRepository() {
         Retrofit retrofit = new Retrofit.Builder()
                                 .baseUrl(BASE_URL)
                                 .addConverterFactory(GsonConverterFactory.create())
-//                                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                                 .build();
 
-//        return retrofit.create(TMDBService.class);
         service = retrofit.create(TMDBService.class);
     }
 
@@ -53,13 +50,6 @@ public class MovieRepository {
         return movieRepository;
     }
 
-//    public Observable<MoviesResponse> getMovieList() {
-//        service.getPopularMovies(BuildConfig.TMDB_API_KEY, LANGUAGE, 1)
-//                .observeOn(this, )
-//    }
-
-//    public LiveData<MoviesResponse> getMovies() {
-//        MutableLiveData<MoviesResponse> data = new MutableLiveData<>();
     public MutableLiveData<List<Movie>> getMovies() {
         MutableLiveData<List<Movie>> data = new MutableLiveData<>();
 
@@ -70,26 +60,18 @@ public class MovieRepository {
                         if (response.isSuccessful()) {
                             MoviesResponse moviesResponse = response.body();
                             if(moviesResponse != null && moviesResponse.getMovies() != null) {
-//                                callback.onSuccess(moviesResponse.getMovies());
                                 Log.e(TAG, "movieResponse successful");
                                 data.setValue(moviesResponse.getMovies());
                             } else {
-//                                callback.onError();
-                                // Is this correct?
-//                                data.setValue(null);
                                 Log.e(TAG, "moviesResponse empty");
                             }
                         } else {
-//                            callback.onError();
-//                            data.setValue(null);
                             Log.e(TAG, "Response not successful");
                         }
                     }
 
                     @Override
                     public void onFailure(@NonNull Call<MoviesResponse> call, @NonNull Throwable t) {
-//                        callback.onError();
-//                        data.setValue(null);
                         Log.e(TAG, "getMovies failure");
                     }
                 });
@@ -109,18 +91,15 @@ public class MovieRepository {
                             if (genresResponse != null && genresResponse.getGenres() != null) {
                                 data.setValue(genresResponse.getGenres());
                             } else {
-//                                callback.onError();
                                 Log.e(TAG, "genresResponse empty");
                             }
                         } else {
-//                            callback.onError();
                             Log.e(TAG, "GenreResponse not successful");
                         }
                     }
 
                     @Override
                     public void onFailure(@NonNull Call<GenresResponse> call, @NonNull Throwable t) {
-//                        callback.onError();
                         Log.e(TAG, "getGenres Failure");
                     }
                 });
