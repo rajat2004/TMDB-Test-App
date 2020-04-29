@@ -43,7 +43,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
         if (movies != null)
             return movies.size();
         else
-            return 1;
+            return 0;
     }
 
     public void setMovies(List<Movie> movies) {

@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-//import com.example.tmdb_test_app.Movie;
 import com.example.tmdb_test_app.model.Movie;
 import com.example.tmdb_test_app.network.MovieRepository;
 
