@@ -8,27 +8,27 @@ import java.util.List;
 public class Movie {
     @SerializedName("id")
     @Expose
-    private int id;
+    public int id;
 
     @SerializedName("title")
     @Expose
-    private String title;
+    public String title;
 
     @SerializedName("poster_path")
     @Expose
-    private String poster_path;
+    public String poster_path;
 
     @SerializedName("release_date")
     @Expose
-    private String release_date;
+    public String release_date;
 
     @SerializedName("vote_average")
     @Expose
-    private float rating;
+    public float rating;
 
     @SerializedName("genre_ids")
     @Expose
-    private List<Integer> genre_ids;
+    public List<Integer> genre_ids;
 
     public int getId() {
         return id;
