@@ -17,6 +17,42 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+    
+    <RelativeLayout
+        android:id="@+id/popuplayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+<!--        <EditText-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:id="@+id/editText"-->
+<!--            android:hint="@string/help_text"-->
+<!--            android:focusable="true"-->
+<!--            android:textColorHighlight="#ff7eff15"-->
+<!--            android:textColorHint="#ffff25e6"-->
+<!--            android:layout_marginTop="46dp"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            />-->
+
+        <WebView
+            android:id="@+id/webView"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginTop="100dp"
+            android:scrollbars="none"
+            android:layout_below="@+id/editText"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
+    </RelativeLayout>
 
 <!--    <TextView-->
 <!--        android:layout_width="wrap_content"-->

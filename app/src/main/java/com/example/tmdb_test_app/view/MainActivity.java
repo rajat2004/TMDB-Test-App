@@ -2,6 +2,10 @@ package com.example.tmdb_test_app.view;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.webkit.WebResourceRequest;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -14,15 +18,17 @@ import com.example.tmdb_test_app.R;
 import com.example.tmdb_test_app.databinding.ActivityMainBinding;
 import com.example.tmdb_test_app.model.Movie;
 import com.example.tmdb_test_app.viewmodel.MovieListViewModel;
+import com.example.tmdb_test_app.viewmodel.myWebViewClient;
 
 import java.util.List;
+
+import static com.example.tmdb_test_app.utils.Constants.GAME_PATH;
 
 public class MainActivity extends AppCompatActivity {
     private final String TAG = getClass().getSimpleName();
 
     private MovieListViewModel model;
     private MoviesAdapter moviesAdapter;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +38,14 @@ public class MainActivity extends AppCompatActivity {
         // bind recycler view
         RecyclerView recyclerView = activityMainBinding.moviesList;
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        // Add WebView to display game
+        WebView wv = (WebView) findViewById(R.id.webView);
+        WebSettings ws = wv.getSettings();
+        ws.setJavaScriptEnabled(true);
+        wv.setWebViewClient(new myWebViewClient());
+
+        wv.loadUrl(GAME_PATH);
 
         model = new ViewModelProvider(this).get(MovieListViewModel.class);
         moviesAdapter = new MoviesAdapter();
@@ -52,3 +66,4 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 }
+
