@@ -3,7 +3,6 @@ package com.example.tmdb_test_app.network;
 import com.example.tmdb_test_app.model.MoviesResponse;
 import com.example.tmdb_test_app.model.GenresResponse;
 
-//import io.reactivex.Observable;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;

@@ -7,9 +7,6 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.tmdb_test_app.BuildConfig;
-//import com.example.tmdb_test_app.Genre;
-//import com.example.tmdb_test_app.Movie;
-//import com.example.tmdb_test_app.MoviesResponse;
 import com.example.tmdb_test_app.model.Genre;
 import com.example.tmdb_test_app.model.GenresResponse;
 import com.example.tmdb_test_app.model.Movie;
@@ -25,9 +22,10 @@ import retrofit2.Response;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import static com.example.tmdb_test_app.utils.Constants.BASE_URL;
+import static com.example.tmdb_test_app.utils.Constants.LANGUAGE;
+
 public class MovieRepository {
-    private static final String BASE_URL = "https://api.themoviedb.org/3/";
-    private static final String LANGUAGE = "en_US";
 
     private static MovieRepository movieRepository;
     private TMDBService service;
