@@ -1,4 +1,4 @@
-package com.example.tmdb_test_app;
+package com.example.tmdb_test_app.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
