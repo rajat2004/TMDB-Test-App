@@ -2,10 +2,8 @@ package com.example.tmdb_test_app.view;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -18,7 +16,7 @@ import com.example.tmdb_test_app.R;
 import com.example.tmdb_test_app.databinding.ActivityMainBinding;
 import com.example.tmdb_test_app.model.Movie;
 import com.example.tmdb_test_app.viewmodel.MovieListViewModel;
-import com.example.tmdb_test_app.viewmodel.myWebViewClient;
+import com.example.tmdb_test_app.viewmodel.GameWebViewClient;
 
 import java.util.List;
 
@@ -43,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         WebView wv = (WebView) findViewById(R.id.webView);
         WebSettings ws = wv.getSettings();
         ws.setJavaScriptEnabled(true);
-        wv.setWebViewClient(new myWebViewClient());
+        wv.setWebViewClient(new GameWebViewClient());
 
         wv.loadUrl(GAME_PATH);
 

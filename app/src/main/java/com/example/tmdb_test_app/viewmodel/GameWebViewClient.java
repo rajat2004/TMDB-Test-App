@@ -4,7 +4,7 @@ import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-public class myWebViewClient extends WebViewClient{
+public class GameWebViewClient extends WebViewClient {
 
     @Override
     public void onPageFinished(WebView view, String url) {
