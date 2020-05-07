@@ -20,13 +20,15 @@ public class GameInterface {
             Type.CLOSE,
             Type.OPEN,
             Type.SCREEN_SIZE,
-            Type.TOAST
+            Type.TOAST,
+            Type.ORIENTATION,
     })
 
     private @interface Type {
         int CLOSE = 1;
         int OPEN = 2;
         int SCREEN_SIZE = 3;
+        int ORIENTATION = 4;
 
         int TOAST = 99; // Just for testing
     }
@@ -47,8 +49,11 @@ public class GameInterface {
                         break;
 
                     case Type.SCREEN_SIZE:
-                        DisplayMetrics displayMetrics = playableAdInterface.getScreenSize();
-                        msg.obj = displayMetrics;
+                        msg.obj = playableAdInterface.getScreenSize();
+                        break;
+
+                    case Type.ORIENTATION:
+                        msg.obj = playableAdInterface.getOrientation();
                         break;
 
                     case Type.TOAST:
@@ -87,6 +92,16 @@ public class GameInterface {
         mHandler.handleMessage(msg);
         Log.e(class_name, msg.obj.toString());
         return msg.obj.toString();
+    }
+
+    @JavascriptInterface
+    public int getOrientation() {
+        Log.e(class_name, "GetOrientation called");
+        Message msg = Message.obtain();
+        msg.arg1 = Type.ORIENTATION;
+        mHandler.handleMessage(msg);
+        Log.e(class_name, msg.obj.toString());
+        return (Integer) msg.obj;
     }
 
     // Show message from JS

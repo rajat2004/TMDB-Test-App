@@ -1,6 +1,9 @@
 package com.example.tmdb_test_app.view;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Point;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -52,8 +55,6 @@ public class MainActivity extends AppCompatActivity implements PlayableAdInterfa
         wv = (WebView) findViewById(R.id.webView);
         initWebView();
         wv.loadUrl(GAME_PATH);
-//        wv.setWebViewClient(new WebViewClient());
-//        wv.loadUrl("http://www.google.com");
 
         model = new ViewModelProvider(this).get(MovieListViewModel.class);
         moviesAdapter = new MoviesAdapter();
@@ -98,16 +99,20 @@ public class MainActivity extends AppCompatActivity implements PlayableAdInterfa
         wv.destroy();
     }
 
-    // TODO: Fix this
     public void open(String URL) {
         // Open in Browser
-        wv.loadUrl(URL);
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.google.com"));
+        startActivity(browserIntent);
     }
 
-    public DisplayMetrics getScreenSize() {
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        return displayMetrics;
+    public Point getScreenSize() {
+        Point size = new Point();
+        getWindowManager().getDefaultDisplay().getSize(size);
+        return size;
+    }
+
+    public int getOrientation() {
+        return getResources().getConfiguration().orientation;
     }
 
     public void toast(String toast) {

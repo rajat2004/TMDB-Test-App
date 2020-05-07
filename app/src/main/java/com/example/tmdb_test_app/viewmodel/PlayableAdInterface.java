@@ -1,5 +1,6 @@
 package com.example.tmdb_test_app.viewmodel;
 
+import android.graphics.Point;
 import android.util.DisplayMetrics;
 
 public interface PlayableAdInterface {
@@ -10,5 +11,7 @@ public interface PlayableAdInterface {
 
     void toast(String oast); // Test function
 
-    DisplayMetrics getScreenSize();
+    Point getScreenSize();
+
+    int getOrientation();
 }
