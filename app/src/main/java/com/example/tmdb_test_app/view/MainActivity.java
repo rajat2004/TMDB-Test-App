@@ -1,7 +1,9 @@
 package com.example.tmdb_test_app.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -62,6 +64,11 @@ public class MainActivity extends AppCompatActivity implements PlayableAdInterfa
         close();
         wv = null;
         super.onDestroy();
+    }
+
+    public void loadAd(View view) {
+        Intent intent = new Intent(this, AdActivity.class);
+        startActivity(intent);
     }
 
 
