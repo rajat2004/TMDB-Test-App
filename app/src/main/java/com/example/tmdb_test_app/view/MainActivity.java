@@ -1,10 +1,15 @@
 package com.example.tmdb_test_app.view;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -47,6 +52,8 @@ public class MainActivity extends AppCompatActivity implements PlayableAdInterfa
         wv = (WebView) findViewById(R.id.webView);
         initWebView();
         wv.loadUrl(GAME_PATH);
+//        wv.setWebViewClient(new WebViewClient());
+//        wv.loadUrl("http://www.google.com");
 
         model = new ViewModelProvider(this).get(MovieListViewModel.class);
         moviesAdapter = new MoviesAdapter();
@@ -82,10 +89,12 @@ public class MainActivity extends AppCompatActivity implements PlayableAdInterfa
         wv.addJavascriptInterface(new GameInterface(this), "Android");
     }
 
+
+
     // PlayableAdInterface
     public void close() {
-        ViewGroup vg = (ViewGroup)findViewById(R.id.popuplayout);
-        vg.removeAllViews();
+        ViewGroup parent = (ViewGroup) wv.getParent();
+        parent.removeAllViews();
         wv.destroy();
     }
 
@@ -93,6 +102,12 @@ public class MainActivity extends AppCompatActivity implements PlayableAdInterfa
     public void open(String URL) {
         // Open in Browser
         wv.loadUrl(URL);
+    }
+
+    public DisplayMetrics getScreenSize() {
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        return displayMetrics;
     }
 
     public void toast(String toast) {

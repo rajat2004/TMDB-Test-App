@@ -11,4 +11,9 @@ public class GameWebViewClient extends WebViewClient {
         view.evaluateJavascript("javascript:set_player_name('Rajat')", null);
     }
 
+    @Override
+    public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+        return false;
+    }
+
 }
