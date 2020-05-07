@@ -1,12 +1,11 @@
 package com.example.tmdb_test_app.viewmodel;
 
+import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.webkit.JavascriptInterface;
-
-import android.os.Handler;
+import android.webkit.WebView;
 
 import androidx.annotation.IntDef;
 
@@ -21,6 +20,7 @@ public class GameInterface {
             Type.OPEN,
             Type.SCREEN_SIZE,
             Type.TOAST,
+            Type.EVENT,
             Type.ORIENTATION,
     })
 
@@ -29,6 +29,7 @@ public class GameInterface {
         int OPEN = 2;
         int SCREEN_SIZE = 3;
         int ORIENTATION = 4;
+        int EVENT = 5;
 
         int TOAST = 99; // Just for testing
     }
@@ -54,6 +55,10 @@ public class GameInterface {
 
                     case Type.ORIENTATION:
                         msg.obj = playableAdInterface.getOrientation();
+                        break;
+
+                    case Type.EVENT:
+                        playableAdInterface.eventFromAd((String) msg.obj);
                         break;
 
                     case Type.TOAST:
@@ -102,6 +107,15 @@ public class GameInterface {
         mHandler.handleMessage(msg);
         Log.e(class_name, msg.obj.toString());
         return (Integer) msg.obj;
+    }
+
+    @JavascriptInterface
+    public void eventFromAd(String event) {
+        Log.e(class_name, "event triggered from ad: " + event);
+        Message msg = Message.obtain();
+        msg.arg1 = Type.EVENT;
+        msg.obj = event;
+        mHandler.handleMessage(msg);
     }
 
     // Show message from JS

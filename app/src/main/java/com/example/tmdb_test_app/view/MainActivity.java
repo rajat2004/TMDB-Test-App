@@ -2,6 +2,7 @@ package com.example.tmdb_test_app.view;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.Point;
 import android.net.Uri;
 import android.os.Bundle;
@@ -72,6 +73,22 @@ public class MainActivity extends AppCompatActivity implements PlayableAdInterfa
         super.onDestroy();
     }
 
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+
+        // Checks the orientation of the screen
+        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            Toast.makeText(this, "landscape", Toast.LENGTH_SHORT).show();
+        } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT){
+            Toast.makeText(this, "portrait", Toast.LENGTH_SHORT).show();
+        }
+
+        String event = "orientation";
+        Log.e(getClass().getSimpleName(), "Triggering event from App to Ad: "+ event);
+        wv.evaluateJavascript("javascript:triggeredEventFromApp('" + event + "')", null);
+    }
+
 
     private void getAllMovies() {
         model.getMovies().observe(this, new Observer<List<Movie>>() {
@@ -113,6 +130,11 @@ public class MainActivity extends AppCompatActivity implements PlayableAdInterfa
 
     public int getOrientation() {
         return getResources().getConfiguration().orientation;
+    }
+
+    public void eventFromAd(String event) {
+        // Handle events triggered by Ad
+        // TODO: Add some events
     }
 
     public void toast(String toast) {

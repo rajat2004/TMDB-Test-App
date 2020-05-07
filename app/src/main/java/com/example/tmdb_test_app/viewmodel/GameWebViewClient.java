@@ -5,15 +5,13 @@ import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.Toast;
-
-import static android.app.PendingIntent.getActivity;
 
 public class GameWebViewClient extends WebViewClient {
 
     @Override
     public void onPageFinished(WebView view, String url) {
         view.evaluateJavascript("javascript:set_player_name('Rajat')", null);
+        triggerEventToAd("ready", view);
     }
 
     @Override
@@ -22,9 +20,14 @@ public class GameWebViewClient extends WebViewClient {
         Log.e(getClass().getSimpleName(), "WebView error: "+error.getDescription());
     }
 
-    @Override
-    public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
-        return false;
+//    @Override
+//    public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+//        return false;
+//    }
+
+    private void triggerEventToAd(String event, WebView wv) {
+        Log.e(getClass().getSimpleName(), "Triggering event from App to Ad: "+ event);
+        wv.evaluateJavascript("javascript:triggeredEventFromApp('" + event + "')", null);
     }
 
 }
