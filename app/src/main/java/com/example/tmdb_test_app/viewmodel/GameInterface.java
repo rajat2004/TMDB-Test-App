@@ -33,6 +33,7 @@ public class GameInterface {
         int TOAST = 99; // Just for testing
     }
 
+
     public GameInterface(PlayableAdInterface playableAdInterface) {
         this.mHandler = new Handler(Looper.getMainLooper()) {
 

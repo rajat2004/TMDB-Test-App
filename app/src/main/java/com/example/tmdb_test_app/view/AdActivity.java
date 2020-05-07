@@ -14,6 +14,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.tmdb_test_app.R;
+import com.example.tmdb_test_app.viewmodel.AdEventInterface;
 import com.example.tmdb_test_app.viewmodel.GameInterface;
 import com.example.tmdb_test_app.viewmodel.GameWebViewClient;
 import com.example.tmdb_test_app.viewmodel.PlayableAdInterface;
@@ -23,6 +24,8 @@ import static com.example.tmdb_test_app.utils.Constants.GAME_PATH;
 public class AdActivity extends AppCompatActivity implements PlayableAdInterface {
 
     private WebView wv;
+    private GameInterface gi;
+    private AdEventInterface adEventInterface;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -46,9 +49,7 @@ public class AdActivity extends AppCompatActivity implements PlayableAdInterface
             Toast.makeText(this, "portrait", Toast.LENGTH_SHORT).show();
         }
 
-        String event = "orientation";
-        Log.e(getClass().getSimpleName(), "Triggering event from App to Ad: "+ event);
-        wv.evaluateJavascript("javascript:triggeredEventFromApp('" + event + "')", null);
+        adEventInterface.triggerEventToAd("orientation", wv);
     }
 
 
@@ -89,6 +90,8 @@ public class AdActivity extends AppCompatActivity implements PlayableAdInterface
         WebSettings ws = wv.getSettings();
         ws.setJavaScriptEnabled(true);
         wv.setWebViewClient(new GameWebViewClient());
-        wv.addJavascriptInterface(new GameInterface(this), "Android");
+        gi = new GameInterface(this);
+        adEventInterface = new AdEventInterface();
+        wv.addJavascriptInterface(gi, "Android");
     }
 }
