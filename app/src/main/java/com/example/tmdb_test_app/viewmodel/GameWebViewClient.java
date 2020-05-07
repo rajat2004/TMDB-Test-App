@@ -20,10 +20,6 @@ public class GameWebViewClient extends WebViewClient {
         Log.e(getClass().getSimpleName(), "WebView error: "+error.getDescription());
     }
 
-//    @Override
-//    public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
-//        return false;
-//    }
 
     private void triggerEventToAd(String event, WebView wv) {
         Log.e(getClass().getSimpleName(), "Triggering event from App to Ad: "+ event);

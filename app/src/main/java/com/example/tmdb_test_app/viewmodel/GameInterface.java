@@ -5,7 +5,6 @@ import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
 import android.webkit.JavascriptInterface;
-import android.webkit.WebView;
 
 import androidx.annotation.IntDef;
 

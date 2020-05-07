@@ -1,7 +1,6 @@
 package com.example.tmdb_test_app.viewmodel;
 
 import android.graphics.Point;
-import android.util.DisplayMetrics;
 
 public interface PlayableAdInterface {
     void close();
