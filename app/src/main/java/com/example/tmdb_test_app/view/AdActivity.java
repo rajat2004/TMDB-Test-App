@@ -23,9 +23,18 @@ import static com.example.tmdb_test_app.utils.Constants.GAME_PATH;
 
 public class AdActivity extends AppCompatActivity implements PlayableAdInterface {
 
+    private final String class_name = getClass().getSimpleName();
+
     private WebView wv;
     private GameInterface gi;
     private AdEventInterface adEventInterface;
+
+    // Some metrics
+    long startTime;
+    long totalTime = 0;
+    int clicks = 0;
+    int replays = 0;
+    boolean url_opened = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -35,6 +44,9 @@ public class AdActivity extends AppCompatActivity implements PlayableAdInterface
         // Add WebView to display game
         wv = (WebView) findViewById(R.id.webView);
         initWebView();
+
+        startTime = System.nanoTime();
+
         wv.loadUrl(GAME_PATH);
     }
 
@@ -49,18 +61,54 @@ public class AdActivity extends AppCompatActivity implements PlayableAdInterface
             Toast.makeText(this, "portrait", Toast.LENGTH_SHORT).show();
         }
 
-        adEventInterface.triggerEventToAd("orientation", wv);
+        adEventInterface.triggerEventToAd(wv, AdEventInterface.EventType.ORIENTATION, null);
+    }
+
+    @Override
+    protected void onPause() {
+        totalTime += (System.nanoTime() - startTime);
+//        Log.e(class_name, "Pausing: " + totalTime);
+        wv.pauseTimers();
+        wv.onPause();
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        wv.resumeTimers();
+        startTime = System.nanoTime();
+        wv.onResume();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ViewGroup parent = (ViewGroup) wv.getParent();
+        parent.removeView(wv);
+        wv.destroy();
+        wv = null;
+
+        // Log some metrics
+        // Don't use time here since onPause is called on finish() which updates the time
+        // Log.e(class_name, "Time spent: " + totalTime/1e9);
+        Log.e(class_name, "Clicks: " + clicks);
+        Log.e(class_name, "URL opened: " + url_opened);
+        Log.e(class_name, "Replays: " + replays);
     }
 
 
 
     // PlayableAdInterface
     public void close() {
+        totalTime += System.nanoTime() - startTime;
+        Log.e(class_name, "Total time spent: " + totalTime/1e9);
         finish();
     }
 
     public void open(String URL) {
         // Open in Browser
+        url_opened = true;
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(URL));
         startActivity(browserIntent);
     }
@@ -75,9 +123,12 @@ public class AdActivity extends AppCompatActivity implements PlayableAdInterface
         return getResources().getConfiguration().orientation;
     }
 
-    public void eventFromAd(String event) {
-        // Handle events triggered by Ad
-        // TODO: Add some events
+    public void registerClick() {
+        clicks++;
+    }
+
+    public void registerReplay() {
+        replays++;
     }
 
     public void toast(String toast) {
@@ -89,7 +140,7 @@ public class AdActivity extends AppCompatActivity implements PlayableAdInterface
     private void initWebView() {
         WebSettings ws = wv.getSettings();
         ws.setJavaScriptEnabled(true);
-        wv.setWebViewClient(new GameWebViewClient());
+        wv.setWebViewClient(new GameWebViewClient(this));
         gi = new GameInterface(this);
         adEventInterface = new AdEventInterface();
         wv.addJavascriptInterface(gi, "Android");

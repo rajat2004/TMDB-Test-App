@@ -18,9 +18,11 @@ public class GameInterface {
             Type.CLOSE,
             Type.OPEN,
             Type.SCREEN_SIZE,
-            Type.TOAST,
-            Type.EVENT,
             Type.ORIENTATION,
+            Type.CLICK,
+            Type.REPLAY,
+
+            Type.TOAST,
     })
 
     private @interface Type {
@@ -28,7 +30,8 @@ public class GameInterface {
         int OPEN = 2;
         int SCREEN_SIZE = 3;
         int ORIENTATION = 4;
-        int EVENT = 5;
+        int CLICK = 5;
+        int REPLAY = 6;
 
         int TOAST = 99; // Just for testing
     }
@@ -57,8 +60,12 @@ public class GameInterface {
                         msg.obj = playableAdInterface.getOrientation();
                         break;
 
-                    case Type.EVENT:
-                        playableAdInterface.eventFromAd((String) msg.obj);
+                    case Type.CLICK:
+                        playableAdInterface.registerClick();
+                        break;
+
+                    case Type.REPLAY:
+                        playableAdInterface.registerReplay();
                         break;
 
                     case Type.TOAST:
@@ -110,13 +117,21 @@ public class GameInterface {
     }
 
     @JavascriptInterface
-    public void eventFromAd(String event) {
-        Log.e(class_name, "event triggered from ad: " + event);
+    public void registerClick() {
+        Log.e(class_name, "RegisterClick called");
         Message msg = Message.obtain();
-        msg.arg1 = Type.EVENT;
-        msg.obj = event;
+        msg.arg1 = Type.CLICK;
         mHandler.handleMessage(msg);
     }
+
+    @JavascriptInterface
+    public void registerReplay() {
+        Log.e(class_name, "registerReplay called");
+        Message msg = Message.obtain();
+        msg.arg1 = Type.REPLAY;
+        mHandler.handleMessage(msg);
+    }
+
 
     // Show message from JS
     @JavascriptInterface

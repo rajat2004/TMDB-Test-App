@@ -11,8 +11,9 @@ public interface PlayableAdInterface {
 
     int getOrientation();
 
-    // Common method to handle events triggered by Ad
-    void eventFromAd(String event);
+    void registerClick();
+
+    void registerReplay();
 
     void toast(String toast); // Test function
 }
