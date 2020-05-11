@@ -20,12 +20,11 @@ public class AdEventInterface {
         String READY = "ready";
         String PAUSE = "pause";
         String RESUME = "resume";
-        String ORIENTATION = "orientation";
+        String ORIENTATION = "orien";
     }
 
     public void triggerEventToAd(WebView wv, String event, ValueCallback<String> callback) {
         Log.e(getClass().getSimpleName(), "Triggering event from App to Ad: "+ event);
-//        wv.evaluateJavascript("javascript:triggeredEventFromApp('" + event + "')", null);
         wv.evaluateJavascript("(function() { window.dispatchEvent(" + event + "); })();", callback);
     }
 
