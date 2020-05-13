@@ -21,7 +21,7 @@ public class GameWebViewClient extends WebViewClient {
 
     @Override
     public void onPageFinished(WebView view, String url) {
-        view.evaluateJavascript("javascript:set_player_name('Rajat')", null);
+//        view.evaluateJavascript("javascript:set_player_name('Rajat')", null);
         adEventInterface.triggerEventToAd(view, AdEventInterface.EventType.READY, null);
 
         // Hide logo image since ad has finished loading
