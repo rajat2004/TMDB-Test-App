@@ -1,7 +1,9 @@
 package com.example.tmdb_test_app.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -23,7 +25,6 @@ public class MainActivity extends AppCompatActivity {
     private MovieListViewModel model;
     private MoviesAdapter moviesAdapter;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
         getAllMovies();
     }
 
+
     private void getAllMovies() {
         model.getMovies().observe(this, new Observer<List<Movie>>() {
             @Override
@@ -51,4 +53,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    public void loadAd(View view) {
+        Log.e(getClass().getSimpleName(), "Launching Ad");
+        Intent intent = new Intent(this, AdActivity.class);
+        startActivity(intent);
+    }
 }
+

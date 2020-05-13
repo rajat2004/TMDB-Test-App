@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">TMDB-Test-App</string>
+    <string name="help_text">Enter Player name</string>
+    <string name="ad_button">Ad</string>
 </resources>
