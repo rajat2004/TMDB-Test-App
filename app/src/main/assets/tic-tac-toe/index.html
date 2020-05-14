@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Tic-Tac-Toe</title>
+        <link rel="stylesheet" href="style.css" />
+    </head>
+
+    <body>
+        <script src="app_interface.js"></script>
+        <div id="img">
+            <img src="tic-tac-toe-logo.jpg">
+        </div>
+
+        <div class="container">
+            <h1>Tic-Tac-Toe</h1>
+
+            <div class="play-area">
+            </div>
+
+            <h2 id="winner"></h2>
+            <button id="replay-btn" onclick="replay()">REPLAY</button>
+            <button id="open-url-btn" onclick="open_url()">URL</button>
+            <button id="close-btn" onclick="on_close()">CLOSE</button>
+
+            <h2 id="debug"></h2>
+
+            <h2 id="timer"> </h2>
+        </div>
+        <script src="game.js"></script>
+    </body>
+</html>
