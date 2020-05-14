@@ -1,5 +1,6 @@
 package com.example.tmdb_test_app.utils;
 
+import android.graphics.Point;
 import android.text.TextUtils;
 
 import com.example.tmdb_test_app.model.Genre;
@@ -27,5 +28,9 @@ public class common_utils {
         }
 
         return TextUtils.join(", ", movie_genres);
+    }
+
+    public static String shortString(Point p) {
+        return "[" + p.x + "," + p.y + "]";
     }
 }

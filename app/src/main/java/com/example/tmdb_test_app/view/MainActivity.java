@@ -1,7 +1,9 @@
 package com.example.tmdb_test_app.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -23,24 +25,24 @@ public class MainActivity extends AppCompatActivity {
     private MovieListViewModel model;
     private MoviesAdapter moviesAdapter;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ActivityMainBinding activityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
 
         // bind recycler view
-        RecyclerView recyclerView = activityMainBinding.moviesList;
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        model = new ViewModelProvider(this).get(MovieListViewModel.class);
-        moviesAdapter = new MoviesAdapter();
-        recyclerView.setAdapter(moviesAdapter);
-
-        Log.e(TAG, "Inside onCreate");
-
-        getAllMovies();
+//        RecyclerView recyclerView = activityMainBinding.moviesList;
+//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+//
+//        model = new ViewModelProvider(this).get(MovieListViewModel.class);
+//        moviesAdapter = new MoviesAdapter();
+//        recyclerView.setAdapter(moviesAdapter);
+//
+//        Log.e(TAG, "Inside onCreate");
+//
+//        getAllMovies();
     }
+
 
     private void getAllMovies() {
         model.getMovies().observe(this, new Observer<List<Movie>>() {
@@ -51,4 +53,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    public void loadAd(View view) {
+        Log.e(getClass().getSimpleName(), "Launching Ad");
+        Intent intent = new Intent(this, AdActivity.class);
+        startActivity(intent);
+    }
 }
+
