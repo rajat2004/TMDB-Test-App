@@ -14,6 +14,4 @@ public interface PlayableAdInterface {
     void registerClick();
 
     void registerReplay();
-
-    void toast(String toast); // Test function
 }

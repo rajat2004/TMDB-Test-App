@@ -21,8 +21,6 @@ public class GameInterface {
             Type.ORIENTATION,
             Type.CLICK,
             Type.REPLAY,
-
-            Type.TOAST,
     })
 
     private @interface Type {
@@ -32,8 +30,6 @@ public class GameInterface {
         int ORIENTATION = 4;
         int CLICK = 5;
         int REPLAY = 6;
-
-        int TOAST = 99; // Just for testing
     }
 
 
@@ -67,10 +63,6 @@ public class GameInterface {
                     case Type.REPLAY:
                         playableAdInterface.registerReplay();
                         break;
-
-                    case Type.TOAST:
-                        playableAdInterface.toast((String) msg.obj);
-                        break;
                 }
             }
         };
@@ -102,7 +94,6 @@ public class GameInterface {
         Message msg = Message.obtain();
         msg.arg1 = Type.SCREEN_SIZE;
         mHandler.handleMessage(msg);
-//        Log.e(class_name, msg.obj.toString());
         Log.e(class_name, (String) msg.obj );
         return (String) msg.obj;
     }
@@ -131,16 +122,5 @@ public class GameInterface {
         Message msg = Message.obtain();
         msg.arg1 = Type.REPLAY;
         mHandler.handleMessage(msg);
-    }
-
-
-    // Show message from JS
-    @JavascriptInterface
-    public void showToast(String toast) {
-        Log.e(getClass().getSimpleName(), "showToast called");
-        Message msg = Message.obtain();
-        msg.arg1 = Type.TOAST;
-        msg.obj = toast;
-        mHandler.sendMessage(msg);
     }
 }

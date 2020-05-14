@@ -31,16 +31,16 @@ public class MainActivity extends AppCompatActivity {
         ActivityMainBinding activityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
 
         // bind recycler view
-        RecyclerView recyclerView = activityMainBinding.moviesList;
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        model = new ViewModelProvider(this).get(MovieListViewModel.class);
-        moviesAdapter = new MoviesAdapter();
-        recyclerView.setAdapter(moviesAdapter);
-
-        Log.e(TAG, "Inside onCreate");
-
-        getAllMovies();
+//        RecyclerView recyclerView = activityMainBinding.moviesList;
+//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+//
+//        model = new ViewModelProvider(this).get(MovieListViewModel.class);
+//        moviesAdapter = new MoviesAdapter();
+//        recyclerView.setAdapter(moviesAdapter);
+//
+//        Log.e(TAG, "Inside onCreate");
+//
+//        getAllMovies();
     }
 
 

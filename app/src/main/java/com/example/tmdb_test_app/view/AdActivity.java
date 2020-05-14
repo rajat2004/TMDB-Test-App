@@ -134,18 +134,15 @@ public class AdActivity extends AppCompatActivity implements PlayableAdInterface
         replays++;
     }
 
-    public void toast(String toast) {
-        Toast.makeText(this, toast, Toast.LENGTH_SHORT).show();
-    }
-
-
 
     private void initWebView() {
         WebSettings ws = wv.getSettings();
         ws.setJavaScriptEnabled(true);
         wv.setWebViewClient(new GameWebViewClient(this));
+
         gi = new GameInterface(this);
         adEventInterface = new AdEventInterface();
+        // Name of interface to be used in JS by Ad
         wv.addJavascriptInterface(gi, "HotstarAndroid");
         wv.setOnTouchListener(new MyTouchListener());
     }
