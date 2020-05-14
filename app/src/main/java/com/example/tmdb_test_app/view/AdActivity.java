@@ -17,9 +17,12 @@ import com.example.tmdb_test_app.R;
 import com.example.tmdb_test_app.viewmodel.AdEventInterface;
 import com.example.tmdb_test_app.viewmodel.GameInterface;
 import com.example.tmdb_test_app.viewmodel.GameWebViewClient;
+import com.example.tmdb_test_app.viewmodel.MyTouchListener;
 import com.example.tmdb_test_app.viewmodel.PlayableAdInterface;
 
 import static com.example.tmdb_test_app.utils.Constants.GAME_PATH;
+
+import com.example.tmdb_test_app.utils.common_utils;
 
 public class AdActivity extends AppCompatActivity implements PlayableAdInterface {
 
@@ -113,10 +116,10 @@ public class AdActivity extends AppCompatActivity implements PlayableAdInterface
         startActivity(browserIntent);
     }
 
-    public Point getScreenSize() {
+    public String getScreenSize() {
         Point size = new Point();
         getWindowManager().getDefaultDisplay().getSize(size);
-        return size;
+        return common_utils.shortString(size);
     }
 
     public int getOrientation() {
@@ -143,6 +146,7 @@ public class AdActivity extends AppCompatActivity implements PlayableAdInterface
         wv.setWebViewClient(new GameWebViewClient(this));
         gi = new GameInterface(this);
         adEventInterface = new AdEventInterface();
-        wv.addJavascriptInterface(gi, "Android");
+        wv.addJavascriptInterface(gi, "HotstarAndroid");
+        wv.setOnTouchListener(new MyTouchListener());
     }
 }

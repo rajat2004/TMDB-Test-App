@@ -7,7 +7,7 @@ public interface PlayableAdInterface {
 
     void open(String URL);
 
-    Point getScreenSize();
+    String getScreenSize();
 
     int getOrientation();
 

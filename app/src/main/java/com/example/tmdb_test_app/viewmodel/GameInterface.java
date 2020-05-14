@@ -102,8 +102,9 @@ public class GameInterface {
         Message msg = Message.obtain();
         msg.arg1 = Type.SCREEN_SIZE;
         mHandler.handleMessage(msg);
-        Log.e(class_name, msg.obj.toString());
-        return msg.obj.toString();
+//        Log.e(class_name, msg.obj.toString());
+        Log.e(class_name, (String) msg.obj );
+        return (String) msg.obj;
     }
 
     @JavascriptInterface
